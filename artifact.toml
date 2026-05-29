@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Swecha Beauty Looks"
+version = "1.0.0"
+id = "artifacts/swecha-beauty"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22330
+
+[services.development]
+run = "pnpm --filter @workspace/swecha-beauty run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/swecha-beauty", "run", "build" ]
+publicDir = "artifacts/swecha-beauty/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22330"
+BASE_PATH = "/"
